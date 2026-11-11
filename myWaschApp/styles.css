@@ -1,0 +1,708 @@
+:root {
+    /* -- VARIABLEN -- */
+    /* Hier definieren wir Farben und Abstände zentral, um sie überall wiederzuverwenden */
+    --gap: 12px;
+    --radius: 12px;
+    --red: #e74c3c;
+    --grey: #bdc3c7;
+    --green: #2ecc71;
+    --accent: #2d8cff;
+}
+
+* {
+    /* Alle Elemente verwenden das "Border-Box" Modell (Padding vergrößert das Element nicht) */
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #f7f7f9; /* Heller Hintergrund */
+    color: #222; /* Dunkle Schrift */
+}
+
+/* -- HEADER (Kopfzeile) -- */
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: #fff;
+    border-bottom: 1px solid #e5e5ea;
+    position: sticky; /* Bleibt beim Scrollen oben haften */
+    top: 0;
+    z-index: 10;
+}
+
+.header-actions {
+    margin-left: auto; /* Schiebt alles nach rechts */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.demo-indicator {
+    font-size: 12px;
+    color: var(--accent);
+    background: rgba(45, 140, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* -- DROPDOWN MENU -- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.icon-btn:hover {
+    background: rgba(0,0,0,0.05);
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 8px;
+    background: #fff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-menu.hidden {
+    display: none;
+}
+
+.menu-item {
+    padding: 8px 16px;
+    text-align: left;
+    width: 100%;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.menu-item:hover {
+    background: #f5f5f5;
+}
+
+.menu-divider {
+    height: 1px;
+    background: #eee;
+    margin: 8px 0;
+}
+
+.menu-header {
+    padding: 4px 16px;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #999;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* -- DEMO CONTROLS -- */
+.demo-controls {
+    display: flex;
+    gap: 12px;
+    padding: 8px 16px;
+    border-bottom: 1px solid #e5e5ea;
+    background: #fafafa;
+}
+
+.time-slider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.home-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+}
+
+.home-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+.app-title {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* -- VIEWS (Ansichten) -- */
+.view {
+    padding: 16px;
+    padding-bottom: 96px; /* Platz unten für Scrollbereich */
+}
+
+.hidden {
+    display: none !important; /* Versteckt Elemente komplett */
+}
+
+/* -- WELCOME / SPLASH SCREEN -- */
+#welcomeView {
+    padding: 0 !important; /* Keine Abstände für den Welcome-Screen */
+    position: relative; /* Für absolute Positionierung der Bubbles */
+}
+
+.welcome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%); /* Etwas sichtbarer */
+}
+
+/* Dekorative "Blobs" im Hintergrund */
+.welcome-container::before {
+    content: "";
+    position: absolute;
+    top: -150px;
+    left: -150px;
+    width: 500px;
+    height: 500px;
+    background: #cfe2ff; /* Kräftigeres Hellblau */
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.6; /* Deutlich sichtbarer */
+    z-index: 0;
+}
+
+.welcome-container::after {
+    content: "";
+    position: absolute;
+    bottom: -150px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    background: #dbeafe;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.7; /* Deutlich sichtbarer */
+    z-index: 0;
+}
+
+.welcome-logo,
+.welcome-title,
+.welcome-subtitle,
+.welcome-text,
+.welcome-btn {
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-logo {
+    width: 95vw;
+    max-width: 600px;
+    height: auto;
+    margin-bottom: -90px; /* Noch stärkerer negativer Abstand */
+}
+
+.welcome-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: #222;
+}
+
+.welcome-subtitle {
+    font-size: 20px; /* Größer für bessere Lesbarkeit */
+    color: #555;
+    margin: 0 0 12px 0;
+    font-weight: 500;
+}
+
+.welcome-text {
+    font-size: 15px; /* Auch etwas größer */
+    color: #888;
+    margin: 0 0 48px 0; /* Mehr Platz zum Button */
+    max-width: 300px;
+    line-height: 1.5;
+}
+
+.welcome-btn {
+    padding: 16px 48px; /* Größerer Button */
+    font-size: 18px;
+    border-radius: 9999px; /* Pill shape */
+    box-shadow: 0 4px 12px rgba(45, 140, 255, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    z-index: 1;
+}
+
+.welcome-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(45, 140, 255, 0.3);
+}
+
+/* -- BUBBLES ANIMATION -- */
+.bubble-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Klicks gehen durch */
+    z-index: 0; /* Hinter dem Inhalt */
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    border-radius: 50%;
+    /* Darker pale blue for better visibility */
+    background: radial-gradient(circle at 30% 30%, rgba(180, 220, 255, 0.8), rgba(150, 200, 255, 0.4));
+    box-shadow: 0 0 10px rgba(150, 200, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(160, 210, 255, 0.5);
+    opacity: 0.6;
+    animation: rise var(--duration) ease-in infinite;
+}
+
+@keyframes rise {
+    0% {
+        bottom: -100px;
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(var(--sway));
+    }
+    100% {
+        bottom: 120%;
+        transform: translateX(calc(var(--sway) * -1));
+    }
+}
+
+/* -- CARDS (Karten-Design) -- */
+.card {
+    background: #fff;
+    border: 1px solid #e5e5ea;
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.machine-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.machine-card .card-info {
+    align-items: flex-start;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 6px;
+}
+
+.card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.card-badges .badge {
+    background: #f0f0f5;
+    color: #333;
+    font-weight: 500;
+    font-size: 11px;
+    border-radius: 12px;
+    padding: 4px 10px;
+    border: none;
+}
+
+.card-short-info {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 6px;
+    line-height: 1.4;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+.card-sub {
+    font-size: 12px;
+    color: #555;
+}
+
+/* -- BUTTONS -- */
+.btn {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+}
+
+/* Primärer Button (Blau) */
+.btn.primary {
+    background: #2d8cff;
+    color: #fff;
+    border-color: #2d8cff;
+}
+
+/* Danger Button (Rot/Transparent für Stornieren) */
+.btn.danger {
+    background: transparent;
+    color: #e74c3c;
+    border: none;
+    padding: 6px 10px;
+}
+.btn.danger:hover {
+    background: rgba(231, 76, 60, .08);
+}
+
+.btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+/* -- FAB (Floating Action Button) -- */
+.fab {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #e5e5ea;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 90; /* Under toast (100) but above content */
+    color: #333;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.fab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    background: #fdfdfd;
+}
+
+.fab svg {
+    width: 24px;
+    height: 24px;
+}
+
+.fab-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--red);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    border: 2px solid #fff;
+}
+
+/* -- GRID / WOCHENPLAN -- */
+.grid {
+    overflow-x: auto; /* Erlaubt horizontales Scrollen auf kleinen Handys */
+}
+
+.slot-grid {
+    border-collapse: separate;
+    border-spacing: 8px;
+    width: 100%;
+}
+
+.slot-cell {
+    min-width: 96px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    background: #fff;
+}
+
+/* Slot-Zustände */
+.slot-cell.locked {
+    background: var(--grey);
+    color: #333;
+}
+
+.slot-cell.booked {
+    background: var(--red);
+    color: #fff;
+}
+
+.slot-cell.available {
+    background: #fff;
+}
+
+.slot-cell.selected {
+    outline: 3px solid var(--accent); /* Hervorhebung bei Auswahl */
+}
+
+.grid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* -- LISTE DES RÉSERVATIONS -- */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid #e5e5ea;
+    border-radius: var(--radius);
+    background: #fff;
+}
+
+.row > div:first-child {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.row .badge {
+    font-weight: 600;
+    font-size: 12px;
+    color: #333;
+}
+
+.row .badge.planned { color: #2d8cff; }
+.row .badge.running { color: #2ecc71; }
+.row .badge.finished { color: #999; }
+.row .badge.canceled { color: #e74c3c; }
+
+/* Zeilen für Statusanzeigen (z.B. Monitor, Leere States) */
+.row-status {
+    font-size: 13px;
+    color: #555;
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 6px 10px;
+    margin-top: 4px;
+}
+
+/* Actions dans les modals */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+/* -- LEGENDE -- */
+.legend {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 6px 10px;
+    font-size: 12px;
+    background: #fff;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.dot.available { background: #fff; border: 1px solid #ccc; }
+.dot.booked { background: var(--red); }
+.dot.locked { background: var(--grey); }
+.dot.selected { background: var(--accent); }
+
+/* -- MONITOR OVERVIEW -- */
+.monitor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 12px 0 16px;
+}
+
+.monitor-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.monitor-slot-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.monitor-slot-row {
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.monitor-slot-row.available {
+    background: #e8f5e9;
+}
+
+.monitor-slot-row.booked {
+    background: #fdecea;
+}
+
+.monitor-slot-row.locked {
+    background: #f4f4f6;
+}
+
+/* Badges pour le journal d'événements */
+.evt-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+.evt-badge.evt-created {
+    background: rgba(46, 204, 113, 0.12);
+    color: #27ae60;
+}
+
+.evt-badge.evt-canceled {
+    background: rgba(231, 76, 60, 0.1);
+    color: #e74c3c;
+}
+
+.evt-badge.evt-locked {
+    background: rgba(189, 195, 199, 0.3);
+    color: #555;
+}
+
+.evt-badge.evt-error {
+    background: rgba(231, 76, 60, 0.15);
+    color: #c0392b;
+}
+
+.evt-badge.evt-info {
+    background: rgba(45, 140, 255, 0.12);
+    color: #2d8cff;
+}
+
+/* -- TOAST (Benachrichtigung) -- */
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 100;
+}
+
+.toast {
+    background: #333;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    animation: fadein 0.3s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* -- MODAL -- */
+.modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 24px;
+    border-radius: var(--radius);
+    max-width: 320px;
+    text-align: center;
+}
